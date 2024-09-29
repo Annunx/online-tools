@@ -1,0 +1,15 @@
+{
+  "name": "online-tools",
+  "version": "1.0.0",
+  "description": "Online tools",
+  "main": "mian.js",
+  "author": "Annunx",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "uuid": "^10.0.0"
+  }
+}
