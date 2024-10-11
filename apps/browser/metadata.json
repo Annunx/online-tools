@@ -1,0 +1,11 @@
+{
+  "name": "浏览器信息",
+  "desc": "浏览器信息嗅探",
+  "index": "index.html",
+  "icon": "icon.png",
+  "target": "_blank",
+  "version": 1,
+  "createTime": "2024-10-11",
+  "updateTime": "",
+  "id": "c17c3e0a-af7b-4145-bf25-e4c1c14760a6"
+}

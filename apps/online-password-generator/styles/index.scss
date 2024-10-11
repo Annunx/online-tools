@@ -1,0 +1,71 @@
+.el-form-item__content {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  line-height: normal !important;
+}
+
+.title {
+  text-align: center;
+}
+.main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .options {
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    padding: 20px;
+
+    .chapter {
+      border: 1px dashed #eee;
+      position: relative;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-sizing: border-box;
+      padding: 10px 8px;
+
+      h2 {
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        background-color: #ffffff;
+        padding: 0 10px;
+        color: #999999;
+        text-align: center;
+      }
+    }
+
+
+    .btns {
+      display: flex;
+      align-items: center;
+
+      &>div {
+        margin: 0 5px;
+      }
+    }
+  }
+
+  .password-text {
+    width: 100%;
+    min-height: 60px;
+    margin-bottom: 20px;
+    position: relative;
+
+    .password-box {
+      width: 100%;
+      font-size: 36px;
+      text-align: center;
+      font-weight: bold;
+      letter-spacing: 4px;
+      line-height: 60px;
+    }
+  }
+}
+
+.el-form-item {
+  margin-bottom: 0;
+
+}

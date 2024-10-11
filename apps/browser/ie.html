@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>浏览器信息检测工具</title>
+  <link href="/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <script src="/libs/ua-parser/1.0.39/ua-parser.min.js"></script>
+</head>
+
+<body>
+  <div class="container-full">
+    <h1 class="d-flex justify-content-center pt-5 pb-3">IE浏览器嗅探</h1>
+    <div class="container text-center">
+
+    </div>
+
+  </div>
+
+  <script>
+    window.onload = function () {
+      var uap = new UAParser();
+      var result = uap.getBrowser();
+      if (result.name === 'IE' || result.name === 'IEMobile') {
+        document.querySelector('.container').innerHTML = '这是IE浏览器：' + result.name
+      } else {
+        document.querySelector('.container').innerHTML = '这不是IE浏览器：' + result.name
+      }
+    }
+  </script>
+
+</body>
+
+</html>

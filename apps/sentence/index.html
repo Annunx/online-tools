@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一言</title>
+    <link rel="stylesheet" href="/libs//bootstrap-icons/1.10.0/bootstrap-icons.css" />
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div id="root" class="container" v-cloak>
+        <div class="center">
+            <div class="main" @click="handleCopyText">
+                <div class="left">「</div>
+                <div class="content">{{content}}</div>
+                <div class="right">」</div>
+            </div>
+            <div class="footer">—— {{author}}「{{origin}}」</div>
+        </div>
+        <div class="action">
+            <div class="action-item refresh" @click="handleRefresh"><i class="bi bi-arrow-counterclockwise"></i></div>
+            <div class="action-item copy" @click="handleCopy"><i class="bi bi-copy"></i></div>
+        </div>
+    </div>
+    <script src="/libs/vue/2.7.14/vue.min.js"></script>
+    <script type="module" src="./index.js"></script>
+</body>
+
+</html>

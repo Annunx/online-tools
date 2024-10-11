@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>浏览器信息检测工具</title>
+  <link href="/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .list-group-item {
+      display: flex;
+    }
+
+    .label {
+      flex: 0;
+      flex-basis: 140px;
+    }
+
+    .value {
+      flex: 1;
+    }
+
+    h1 {
+      text-align: center;
+      line-height: 1.75;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-full">
+    <h1>浏览器信息(MDN)</h1>
+    <div class="container">
+
+    </div>
+  </div>
+
+  <script>
+    const info = []
+    window.onload = function () {
+      if (navigator.appCodeName) {
+        info.push({ label: '开发代号', value: navigator.appCodeName })
+      }
+      if (navigator.appName) {
+        info.push({ label: '浏览器官方名称', value: navigator.appName })
+      }
+      if (navigator.appVersion) {
+        info.push({ label: '浏览器版本', value: navigator.appVersion })
+      }
+      if (navigator.battery) {
+        info.push({ label: '电池充电状态', value: navigator.battery })
+      }
+      if (navigator.connection && Object.keys(navigator.connection) > 0) {
+        info.push({ label: '网络连接信息', value: JSON.stringify(navigator.connection) })
+      }
+      if (navigator.cookieEnabled) {
+        info.push({ label: 'Cookie', value: navigator.cookieEnabled })
+      }
+      if (navigator.geolocation && Object.keys(navigator.connection) > 0) {
+        info.push({ label: '地理位置', value: JSON.stringify(navigator.geolocation) })
+      }
+      if (navigator.javaEnabled) {
+        info.push({ label: '是否支持 Java', value: navigator.javaEnabled() })
+      }
+      if (navigator.hardwareConcurrency) {
+        info.push({ label: 'CPU核心', value: navigator.hardwareConcurrency })
+      }
+      if (navigator.language) {
+        info.push({ label: '用户界面的语言', value: navigator.language })
+      }
+      if (navigator.languages) {
+        info.push({ label: '已安装语言', value: JSON.stringify(navigator.languages) })
+      }
+      if (navigator.mimeTypes && navigator.mimeTypes.length > 0) {
+        const types = new Set()
+        for (let i = 0; i < navigator.mimeTypes.length; i++) {
+          const element = navigator.mimeTypes[i];
+          types.add(element.type)
+          console.log(JSON.stringify(types));
+        }
+        let str = ''
+        types.forEach(type => {
+          str += ';' + type
+        })
+        str = str.replace(';', '')
+        info.push({ label: 'mimeTypes', value: str })
+      }
+
+      if (navigator.onLine) {
+        info.push({ label: '是否联网', value: navigator.onLine ? '已联网' : '网络连接已断开' })
+      }
+
+      if (navigator.oscpu) {
+        info.push({ label: '操作系统', value: navigator.oscpu })
+      }
+      if (navigator.platform) {
+        info.push({ label: '浏览器平台', value: navigator.platform })
+      }
+      if (navigator.userAgent) {
+        info.push({ label: '用户代理', value: navigator.userAgent })
+      }
+      innerHTML(info)
+    }
+    function innerHTML(arr) {
+      let el = ''
+      arr.forEach(item => {
+        el += `<div class="card mb-3"><div class="card-body">
+          <h5 class="card-title">${item.label}</h5>
+          <p class="card-text">${item.value}</p>
+          </div></div>
+        `
+      });
+      document.querySelector('.container').innerHTML = el
+    }
+    function getBrowserType() {
+      let ua = navigator.userAgent.toLocaleLowerCase()
+      let browserType = null
+      if (ua.match(/msie/) != null || ua.match(/trident/) != null) {
+        browserType = 'IE'
+      } else if (ua.match(/firefox/) != null) {
+        browserType = 'firefox'
+      } else if (ua.match(/ucbrowser/) != null) {
+        browserType = 'UC'
+      } else if (ua.match(/opera/) != null || ua.match(/opr/) != null) {
+        browserType = 'opera'
+      } else if (ua.match(/bidubrowser/) != null) {
+        browserType = 'baidu'
+      } else if (ua.match(/metasr/) != null) {
+        browserType = 'sougou'
+      } else if (ua.match(/tencenttraveler/) != null || ua.match(/qqbrowse/) != null) {
+        browserType = 'QQ'
+      } else if (ua.match(/maxthon/) != null) {
+        browserType = 'maxthon'
+      } else if (ua.match(/chrome/) != null) {
+        // var is360 = _mime('type', 'application/vnd.chromium.remoting-viewer')
+        // if (is360) {
+        //   browserType = '360'
+        // } else {
+        browserType = 'chrome'
+        // }
+      } else if (ua.match(/safari/) != null) {
+        browserType = 'Safari'
+      } else {
+        browserType = 'others'
+      }
+      return browserType
+    }
+    function getUserOsInfo() {
+      const userAgent = navigator.userAgent;
+      if (userAgent.indexOf("Windows NT 10.0") !== -1) return "Windows 10";
+      if (userAgent.indexOf("Windows NT 6.2") !== -1) return "Windows 8";
+      if (userAgent.indexOf("Windows NT 6.1") !== -1) return "Windows 7";
+      if (userAgent.indexOf("Windows NT 6.0") !== -1) return "Windows Vista";
+      if (userAgent.indexOf("Windows NT 5.1") !== -1) return "Windows XP";
+      if (userAgent.indexOf("Windows NT 5.0") !== -1) return "Windows 2000";
+      if (userAgent.indexOf("Mac") !== -1) return "Mac/iOS";
+      if (userAgent.indexOf("X11") !== -1) return "UNIX";
+      if (userAgent.indexOf("Linux") !== -1) return "Linux";
+      return "Other";
+    }
+
+  </script>
+
+</body>
+
+</html>

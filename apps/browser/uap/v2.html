@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>浏览器信息检测工具</title>
+  <link href="/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <script src="/libs/ua-parser/2.0.0/ua-parser.min.js"></script>
+</head>
+
+<body>
+  <div class="container-full">
+    <h1 class="d-flex justify-content-center pt-5 pb-3">浏览器信息(UAP v2.x)</h1>
+    <div class="container">
+
+    </div>
+    <footer class="d-flex justify-content-center pt-3 pb-5">
+      <a href="https://github.com/faisalman/ua-parser-js">ua-parser-js</a>
+    </footer>
+  </div>
+
+  <script>
+    const info = []
+    window.onload = function () {
+      const ua = new UAParser();
+      const result = ua.getResult()
+      let html = ''
+      for (const key in result) {
+        const arr = ['withFeatureCheck', 'withClientHints', 'getItem']
+        if (arr.includes(key)) {
+          continue
+        }
+        html += `<div class="card mb-3"><div class="card-body">
+          <h5 class="card-title">${key}</h5>
+          <p class="card-text">${JSON.stringify(result[key])}</p>
+          </div></div>
+        `
+      }
+      document.querySelector('.container').innerHTML = html
+    }
+  </script>
+
+</body>
+
+</html>

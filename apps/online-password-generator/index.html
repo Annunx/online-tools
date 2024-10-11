@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>随机密码生成工具</title>
+  <link href="/libs/element-ui/2.15.14/index.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/index.css" />
+</head>
+
+<body>
+  <div id="root" class="container">
+    <el-container>
+      <el-header class="header">
+        <h2 class="title">随机密码生成工具</h2>
+      </el-header>
+      <el-main class="main">
+        <div class="options">
+          <div class="chapter">
+            <h2>预设</h2>
+            <el-form ref="presets" class="btns">
+              <el-form-item>
+                <el-button type="primary" size="mini" @click="handleChangeOptions">生成1条</el-button>
+              </el-form-item>
+            </el-form>
+          </div>
+
+          <div class="chapter">
+            <h2>设置</h2>
+            <el-form ref="formRef" :model="form" label-width="120px" class="form">
+              <el-form-item label="密码长度" prop="length">
+                <el-input-number size="mini" v-model="form.length" controls-position="right" :min="4"
+                  :step-strictly="true"></el-input-number>
+              </el-form-item>
+              <el-form-item label="常用符号" prop="symbols">
+                <el-checkbox :label="source.SYMBOLS" v-model="form.symbols" />
+              </el-form-item>
+              <el-form-item label="数字" prop="numbers">
+                <el-checkbox :label="source.NUMBERS" v-model="form.numbers" />
+              </el-form-item>
+              <el-form-item label="小写字母" prop="lowercaseCharacters">
+                <el-checkbox :label="source.LOWERCASECHARACTERS" v-model="form.lowercaseCharacters" />
+              </el-form-item>
+              <el-form-item label="大写字母" prop="uppercaseCharacters">
+                <el-checkbox :label="source.UPPERCASECHARACTERS" v-model="form.uppercaseCharacters" />
+              </el-form-item>
+              <el-form-item label="移除相近字符" prop="similar">
+                <el-checkbox :label="source.SIMILAR" v-model="form.similar" />
+              </el-form-item>
+              <el-form-item label="自定义字符" prop="custom">
+                <el-input size="mini" v-model="form.custom" placeholder="请输入自定义字符" />
+              </el-form-item>
+              </el-form-item>
+            </el-form>
+          </div>
+
+          <div class="chapter">
+            <h2>总结</h2>
+            <p>123</p>
+          </div>
+          <div class="chapter">
+          <h2>生成</h2>
+            <el-form ref="formBtns" :model="btns" class="btns">
+              <el-form-item>
+                <el-button type="primary" size="mini" @click="handleCreatePwdList(1)">生成1条</el-button>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" size="mini" @click="handleCreatePwdList(10)">生成10条</el-button>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" size="mini" @click="handleCreatePwdList(100)">生成100条</el-button>
+              </el-form-item>
+              <el-form-item>
+                <el-input placeholder="请输入内容" v-model="btns.num" size="mini">
+                  <el-button slot="append" type="primary" size="mini" @click="handleCreatePwdList(0)">生成</el-button>
+                </el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" size="mini" @click="handleShowHistoryList">历史记录(1000条)</el-button>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="danger" size="mini" @click="handleRemoveHistoryList">清空历史记录</el-button>
+              </el-form-item>
+            </el-form>
+          </div>
+        </div>
+        <el-table size="mini" :data="table" border style="width: 100%; margin-bottom: 40px;">
+          <el-table-column type="index"></el-table-column>
+          <el-table-column v-if="view.history" prop="time" label="时间" width="200px"></el-table-column>
+          <el-table-column prop="pwd" label="密码"></el-table-column>
+          <el-table-column label="操作" width="100px">
+            <template slot-scope="scope">
+              <el-button type="primary" size="mini" :class="'copy-'+scope.row.id" :data-clipboard-text="scope.row.pwd"
+                icon="el-icon-copy-document" @click="handleCopyPassword(scope.row)">复制</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-main>
+    </el-container>
+
+
+  </div>
+  <script src="/libs/vue/2.7.14/vue.min.js"></script>
+  <script src="/libs/element-ui/2.15.14/index.min.js"></script>
+  <script src="/libs/uuidv4/8.3.2/uuidv4.min.js"></script>
+  <script src="/libs/dayjs/1.11.7/dayjs.min.js"></script>
+  <script src="/libs/clipboard/2.0.11/clipboard.min.js"></script>
+  <script type="module" src="./scripts/index.js"></script>
+</body>
+
+</html>
