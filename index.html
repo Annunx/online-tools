@@ -24,24 +24,26 @@
       </div>
     </div>
   </header>
-  <main id="root" class="container-full py-4">
-    <div class="container d-flex flex-wrap">
-      <div class="card cursor-pointer hover" v-for="app in apps" :key="app.id" @click="handleOpen(app)">
-        <div class="card-body d-flex">
-          <div class="icon me-2">
-            <img :src="app.icon" alt="app.name">
+  <main id="root" class="container-full" :style="styleObj">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 apps">
+        <div class="app-item col" v-for="app in apps" :key="app.id" @click="handleOpen(app)">
+          <div class="card cursor-pointer hover">
+            <div class="card-body d-flex">
+              <div class="icon me-2">
+                <img :src="app.icon" :alt="app.name">
+              </div>
+              <div class="content">
+                <h5 class="card-title ellipsis" :alt="app.name">{{app.name}}</h5>
+                <p class="card-text ellipsis" :alt="app.desc">{{app.desc}}</p>
+              </div>
+            </div>
           </div>
-          <div class="content">
-            <h5 class="card-title">{{app.name}}</h5>
-            <p class="card-text">{{app.desc}}</p>
-          </div>
-
         </div>
       </div>
     </div>
-
   </main>
-  <footer class="container-full fixed-bottom">
+  <footer class="container-full fixed-bottom footer" id="footer">
     <div class="container">
       <p class="text-center text-sm mb-1">
         <a href="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank" id="icp">滇ICP备15007323号</a>
