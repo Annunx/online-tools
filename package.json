@@ -6,7 +6,8 @@
   "author": "Annunx",
   "license": "MIT",
   "scripts": {
-    "build": "node build.js"
+    "create": "node create.js",
+    "update": "node update.js"
   },
   "dependencies": {
     "dayjs": "^1.11.13",
