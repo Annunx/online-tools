@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>中国个人信息生成器</title>
+  <link href="/libs/element-ui/2.15.14/index.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/index.css" />
+</head>
+
+<body>
+  <div id="root" class="container">
+    <el-container>
+      <el-header class="header">
+        <h2 class="title">中国个人信息生成器</h2>
+        <p class="warning">
+          免责声明：个人信息生成器由系统随机组合而成，不会涉及任何隐私泄密问题，也不对应现实生活中真实的身份证号码和姓名；身份证号码所属年龄为20至80岁之间，可以通过身份证规则校验；生成信息仅供测试使用，请不要将身份证号码和姓名用于任何非法用途，且自行承担使用本工具的任何后果和责任。
+        </p>
+      </el-header>
+      <el-main>
+        <el-row>
+          <el-form ref="form" inline :model="form">
+            <el-form-item label="姓名">
+              <el-switch v-model="form.name">
+            </el-form-item>
+            <el-form-item label="性别">
+              <el-switch v-model="form.sex">
+            </el-form-item>
+            <el-form-item label="生日">
+              <el-switch v-model="form.birthday">
+            </el-form-item>
+            <el-form-item label="年龄">
+              <el-switch v-model="form.age">
+            </el-form-item>
+            <el-form-item label="民族">
+              <el-switch v-model="form.nation">
+            </el-form-item>
+            <el-form-item label="工作">
+              <el-switch v-model="form.work">
+            </el-form-item>
+            <el-form-item label="身份证号">
+              <el-switch v-model="form.id">
+            </el-form-item>
+            <el-form-item label="手机号码">
+              <el-switch v-model="form.mobile">
+            </el-form-item>
+            <el-form-item label="邮箱">
+              <el-switch v-model="form.email">
+            </el-form-item>
+            <el-form-item label="区域">
+              <el-switch v-model="form.area">
+            </el-form-item>
+            <el-form-item label="公司">
+              <el-switch v-model="form.company">
+            </el-form-item>
+            <el-form-item label="所属银行">
+              <el-switch v-model="form.bank">
+            </el-form-item>
+            <el-form-item label="银行卡号">
+              <el-switch v-model="form.debit">
+            </el-form-item>
+          </el-form>
+        </el-row>
+        <el-row style="margin-bottom: 10px;">
+          <el-form ref="form" inline :model="model">
+            <el-form-item label="最小年龄">
+              <el-input-number size="mini" v-model="model.minAge" :min="1" :max="model.maxAge"></el-input-number>
+            </el-form-item>
+            <el-form-item label="最大年龄">
+              <el-input-number size="mini" v-model="model.maxAge" :min="model.minAge" :max="100"></el-input-number>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" size="mini" @click="handleCreatePersonList(1)">生成1条</el-button>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" size="mini" @click="handleCreatePersonList(10)">生成10条</el-button>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" size="mini" @click="handleCreatePersonList(100)">生成100条</el-button>
+            </el-form-item>
+            <el-form-item>
+              <el-input placeholder="请输入内容" v-model="model.num" size="mini">
+                <el-button slot="append" type="primary" size="mini" @click="handleCreatePersonList(0)">生成</el-button>
+              </el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" size="mini" @click="handleDownloadPersonList">下载Excel</el-button>
+            </el-form-item>
+          </el-form>
+        </el-row>
+        <el-row>
+          <el-table size="mini" :data="table" border style="width: 100%; margin-bottom: 40px;">
+            <el-table-column type="index"></el-table-column>
+            <el-table-column v-if="form.name" label="姓名" width="70px">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'name-'+scope.row.id" :data-clipboard-text="scope.row.name"
+                  @click="handleCopyPassword(scope.row, 'name')">{{scope.row.name}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.sex" label="性别" width="50px">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'sex-'+scope.row.id" :data-clipboard-text="scope.row.sex"
+                  @click="handleCopyPassword(scope.row, 'sex')">{{scope.row.sex}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.sex" label="生日" width="90px">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'birthday-'+scope.row.id" :data-clipboard-text="scope.row.birthday"
+                  @click="handleCopyPassword(scope.row, 'birthday')">{{scope.row.birthday}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.age" label="年龄" width="50px">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'age-'+scope.row.id" :data-clipboard-text="scope.row.age"
+                  @click="handleCopyPassword(scope.row, 'age')">{{scope.row.age}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.nation" label="民族" width="90px">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'nation-'+scope.row.id" :data-clipboard-text="scope.row.nation"
+                  @click="handleCopyPassword(scope.row, 'nation')">{{scope.row.nation}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.work" label="工作" width="90px">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'work-'+scope.row.id" :data-clipboard-text="scope.row.work"
+                  @click="handleCopyPassword(scope.row, 'work')">{{scope.row.work}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.id" label="身份证号" width="150px">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'id-'+scope.row.id" :data-clipboard-text="scope.row.id"
+                  @click="handleCopyPassword(scope.row, 'id')">{{scope.row.id}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.mobile" label="手机号码" width="100px">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'mobile-'+scope.row.id" :data-clipboard-text="scope.row.mobile"
+                  @click="handleCopyPassword(scope.row, 'mobile')">{{scope.row.mobile}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.email" label="邮箱" width="180px">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'email-'+scope.row.id" :data-clipboard-text="scope.row.email"
+                  @click="handleCopyPassword(scope.row, 'email')">{{scope.row.email}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.area" label="区域">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'area-'+scope.row.id" :data-clipboard-text="scope.row.area"
+                  @click="handleCopyPassword(scope.row, 'area')">{{scope.row.area}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.company" label="公司">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'company-'+scope.row.id" :data-clipboard-text="scope.row.company"
+                  @click="handleCopyPassword(scope.row, 'company')">{{scope.row.company}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.bank" label="所属银行">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'bank-'+scope.row.id" :data-clipboard-text="scope.row.bank"
+                  @click="handleCopyPassword(scope.row, 'bank')">{{scope.row.bank}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column v-if="form.debit" prop="debit" label="银行卡号" width="160px">
+              <template slot-scope="scope">
+                <span class="copy-text" :class="'debit-'+scope.row.id" :data-clipboard-text="scope.row.debit"
+                  @click="handleCopyPassword(scope.row, 'debit')">{{scope.row.debit}}</span>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-row>
+      </el-main>
+      <el-button class="fixed-download-excel" type="primary" size="mini"
+        @click="handleDownloadPersonList">下载Excel</el-button>
+    </el-container>
+
+
+  </div>
+  <script src="/libs/vue/2.7.14/vue.min.js"></script>
+  <script src="/libs/element-ui/2.15.14/index.min.js"></script>
+  <script src="/libs/pinyin-pro/3.25.0/index.js"></script>
+  <script src="/libs/exceljs/4.4.0/exceljs.min.js"></script>
+  <script src="/libs/clipboard/2.0.11/clipboard.min.js"></script>
+  <script src="/libs/file-saver/2.0.5/FileSaver.min.js"></script>
+  <script type="module" src="./scripts/index.js"></script>
+</body>
+
+</html>

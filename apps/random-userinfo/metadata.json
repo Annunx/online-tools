@@ -1,0 +1,9 @@
+{
+  "name": "个人信息生成器(中国)",
+  "desc": "由系统随机组合而成个人信息",
+  "index": "index.html",
+  "icon": "icon.png",
+  "version": 1.0,
+  "createTime": "2022-07-04",
+  "updateTime": ""
+}

@@ -1,0 +1,218 @@
+@import "../../../common/scss/reset";
+
+@mixin button {
+  input[type="button"] {
+    width: auto;
+    height: 36px;
+    border-width: 0;
+    border-radius: 4px;
+    background: #1e90ff;
+    cursor: pointer;
+    outline: none;
+    color: white;
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  input[type="button"]:hover {
+    /* 鼠标移入按钮范围时改变颜色 */
+    background: #5599ff;
+  }
+}
+
+.el-form-item {
+  margin-bottom: 0;
+}
+
+.el-form-item__content .el-input-group {
+  vertical-align: middle !important;
+}
+
+.container {
+  padding: 15px;
+
+  .header {
+    width: 100%;
+    height: auto !important;
+
+    .title {
+      width: 100%;
+      height: 80px;
+      text-align: center;
+      font-size: 24px;
+      line-height: 80px;
+    }
+
+    .warning {
+      background-color: rgb(252, 248, 227);
+      border-radius: 4px;
+      border: 1px solid rgb(250, 235, 204);
+      box-sizing: border-box;
+      color: rgb(138, 109, 59);
+      display: block;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      line-height: 20px;
+      padding: 15px;
+    }
+  }
+
+  .form {
+    .form-chapter {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      margin-bottom: 10px;
+
+      .name {
+        flex: none;
+        width: 100px;
+        text-align: right;
+      }
+
+      &.create-project {
+        .create-project-list {
+          display: flex;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          align-items: center;
+          align-content: center;
+
+          .create-project-list-item {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            align-items: center;
+            align-content: center;
+            margin-right: 10px;
+
+            /* Switch开关样式 */
+            input[type="checkbox"].switch {
+              outline: none;
+              appearance: none;
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              position: relative;
+              width: 40px;
+              height: 20px;
+              background: #ccc;
+              border-radius: 10px;
+              cursor: pointer;
+              transition: border-color 0.3s, background-color 0.3s;
+            }
+
+            input[type="checkbox"].switch::after {
+              content: "";
+              display: inline-block;
+              width: 1rem;
+              height: 1rem;
+              border-radius: 50%;
+              background: #fff;
+              box-shadow: 0, 0, 2px, #999;
+              transition: 0.4s;
+              top: 2px;
+              position: absolute;
+              left: 2px;
+            }
+
+            input[type="checkbox"].switch:checked {
+              background: rgb(19, 206, 102);
+            }
+
+            /* 当input[type=checkbox]被选中时：伪元素显示下面样式 位置发生变化 */
+            input[type="checkbox"].switch:checked::after {
+              content: "";
+              position: absolute;
+              left: 55%;
+              top: 2px;
+            }
+          }
+        }
+      }
+
+      &.create-btn {
+        .create-btn-list {
+          display: flex;
+
+          .btn {
+            margin-right: 10px;
+            @include button;
+
+            &.btn-input {
+              display: flex;
+
+              .create-number-input {
+                box-sizing: border-box;
+                border-radius: 4px 0 0 4px;
+                height: 36px;
+                border: 1px solid #1e90ff;
+                overflow: hidden;
+
+                input {
+                  box-sizing: border-box;
+                  padding: 0 10px;
+                  margin: 0;
+                  height: 34px;
+                  width: 100px;
+                  border: none;
+                  outline: none;
+                }
+              }
+
+              .create-number-input-btn {
+                @include button;
+
+                input[type="button"] {
+                  border-radius: 0 4px 4px 0 !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    .left {
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+
+      .btn-item {
+        margin-right: 10px;
+      }
+    }
+
+    .right {
+      flex: 0;
+    }
+
+  }
+
+  .content {
+    table {
+
+      th,
+      td {
+        border: 1px solid #999999;
+        padding: 10px;
+        font-size: 12px;
+      }
+    }
+  }
+  .fixed-download-excel {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+  }
+  .copy-text {
+    cursor: pointer;
+  }
+}
