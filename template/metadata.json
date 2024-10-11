@@ -3,6 +3,7 @@
   "desc": "URL在线编码解码工具（UrlEncode编码 和 UrlDecode解码）",
   "index": "index.html",
   "icon": "icon.png",
+  "target": "_blank",
   "version": 1.0,
   "createTime": "2022-07-04",
   "updateTime": ""
