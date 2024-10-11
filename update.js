@@ -41,8 +41,9 @@ metadata.forEach(item => {
   const obj = {
     name: dataObject.name,
     desc: dataObject.desc,
-    icon: dataObject.icon ? item.replace('metadata.json', dataObject.icon) : 'icon.png',
-    index: dataObject.index ? item.replace('metadata.json', dataObject.index) : ''
+    icon: dataObject.icon ? item.replace('metadata.json', dataObject.icon).replaceAll(path.sep, '/') : '/images/icon.png',
+    index: dataObject.index ? item.replace('metadata.json', dataObject.index).replaceAll(path.sep, '/') : '',
+    taget: dataObject.taget ?? '_blank'
   }
   console.log(obj);
   list.push(obj)
