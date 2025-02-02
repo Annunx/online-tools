@@ -1,0 +1,11 @@
+{
+  "name": "Bibi EPUB Reader",
+  "desc": "EPUB 阅读器",
+  "index": "bibi/index.html",
+  "icon": "bibi.png",
+  "target": "_blank",
+  "version": 1,
+  "createTime": "2024-10-24",
+  "updateTime": "",
+  "id": "833ee665-48d5-494b-9a4f-1e4b5ed1fe01"
+}
