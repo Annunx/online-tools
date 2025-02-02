@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "LxgwWenKai";
+  src: url("/libs/fonts/LXGWWenKai-Medium.ttf");
+}
+
 html,
 body {
   margin: 0;
@@ -9,6 +14,7 @@ body {
   min-height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
+  background-image: url("./images/alpine.jpg");
 }
 
 .container {
@@ -24,6 +30,7 @@ body {
       position: relative;
       cursor: pointer;
       color: #fff;
+      font-family: "LxgwWenKai", serif;
 
       .left,
       .right {
